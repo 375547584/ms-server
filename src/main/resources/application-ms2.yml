@@ -1,0 +1,37 @@
+#redis
+redis:
+  host: 172.25.14.72
+  port: 6379
+  password: reds^Da*tsor@kM$ss32
+  database: 1
+db:
+  host: 172.25.14.72
+  port: 3306
+  username: root
+  password: madatsor@k3#7Qssqmss
+mybatisplus:
+  logimpl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+market:
+  holidays: 20221231,20230101,20230102,20230121,20230122,20230123,20230124,20230125,20230126,20230127,20230405,20230429,20230430,20230501,20230502,20230503,20230622,20230623,20230624,20230929,20230930,20231001,20231002,20231003,20231004,20231005,20231006
+  stock:
+    realtime: qts
+    qts:
+      domain: http://172.23.10.191:9000
+      socket_domain: http://172.23.10.191:38888
+      client_no: ms_pro_0x2
+    zlqh:
+      domain: http://172.23.10.195:9999
+      path:
+        stock: /hqshsz/stock
+        stock_price: /hqshsz/perprice
+        block_list: /hqshsz/bklist
+        block_stock_list: /hqshsz/bkin
+        k_line: /hqshsz/kdata
+        k_realtime_line: /hqshsz/minute
+        item_by_deal: /hqshsz/tick
+        his_item_by_deal: /hqshsz/histick
+        stock_dividend_list: /hqshsz/xrxd
+    tu:
+      tushareUrl: http://api.tushare.pro
+      tushareToken: 0ba820a53b73343fa6f40886f2d2881beaa22367acb94fcc609d47e6

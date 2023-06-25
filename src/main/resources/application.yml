@@ -1,0 +1,105 @@
+#服务器端口
+server:
+  port: 8000
+  servlet:
+    encoding:             #解决中文乱码问题，同一使用UTF-8编码
+      charset: UTF-8
+      force: true
+      enabled: true
+      force-request: true
+      force-response: true
+
+spring:
+  swagger2:
+    enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+1
+  profiles:
+    active: ms1     # 环境配置：  dev 开发环境   test-测试环境   pro 生产环境
+  flyway:
+    enabled: true
+    # 禁止清理数据库表
+    clean-disabled: true
+    baseline-description: baselines
+    # 如果数据库不是空表，需要设置成 true，否则启动报错
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+    url: jdbc:mysql://${db.host}:${db.port}/stock-market?allowPublicKeyRetrieval=true&useSSL=true&characterEncoding=utf8&useCompress=true&serverTimezone=GMT%2B1&useAffectedRows=true
+    user: ${db.username}
+    password: ${db.password}
+  redis:
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
+    database: ${redis.database}
+  datasource:
+    dynamic:
+      druid:
+        initial-size: 5
+        min-idle: 5
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,slf4j
+        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      datasource:
+        # 主库数据源
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://${db.host}:${db.port}/stock-market?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+          username: ${db.username}
+          password: ${db.password}
+
+# mybatis配置
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.shenhai.tech.market
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件F3.14.0
+  mapperLocations: classpath:mapper/**/*.xml
+mybatis-plus:
+  #  type-enums-package: com.shenhai.tech.market.framework.enums
+  configuration:
+    log-impl: ${mybatisplus.logimpl}
+    default-enum-type-handler: com.shenhai.tech.market.framework.datasource.MybatisEnumTypeHandler
+
+okhttp:
+  connect_timeout: 10
+  read_timeout: 30
+  write_timeout: 30
+  # 最大连接数
+  max_idle_connections: 200
+  # 线程空闲多久后进行校验
+  keep_alive_duration: 300
+
+socketio:
+  # SocketIO端口
+  port: 28888
+  # 连接数大小
+  workCount: 100
+  # 允许客户请求
+  allowCustomRequests: true
+  # 协议升级超时时间(毫秒)，默认10秒，HTTP握手升级为ws协议超时时间
+  upgradeTimeout: 5000
+  # Ping消息超时时间(毫秒)，默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件
+  pingTimeout: 60000
+  # Ping消息间隔(毫秒)，默认25秒。客户端向服务器发送一条心跳消息间隔
+  pingInterval: 10000
+  # 设置HTTP交互最大内容长度
+  maxHttpContentLength: 1048576
+  # 设置最大每帧处理数据的长度，防止他人利用大数据来攻击服务器
+  maxFramePayloadLength: 1048576
+
+
+
+
