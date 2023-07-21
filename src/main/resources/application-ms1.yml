@@ -8,7 +8,7 @@ db:
   host: 172.30.114.1
   port: 3306
   username: root
-  password: tule@123456.A
+  password: q6RX#CC6F8q8cnPTvrw2
 mybatisplus:
   logimpl: org.apache.ibatis.logging.stdout.StdOutImpl
 
