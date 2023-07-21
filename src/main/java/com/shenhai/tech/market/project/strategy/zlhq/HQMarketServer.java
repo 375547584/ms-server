@@ -95,7 +95,9 @@ public class HQMarketServer {
             Map<String, Object> requestMap = new HashMap<>();
             requestMap.put("seccode", StockUtils.codeToSymbol(code));
             JsonObject response = postRequest(marketConfig.qhDomain + marketConfig.qhStockDividendList, JSONUtils.toExcJson(requestMap));
-            return hqMarketParser.parseDividends(response, false);
+            List<Dividend> dividends = hqMarketParser.parseDividends(response, false);
+            dividends.forEach(i -> i.setCode(code));
+            return dividends;
         }
         catch (Exception e) {
             log.error("getDividendsByCode Exception code:{}  e:{}", code, e);

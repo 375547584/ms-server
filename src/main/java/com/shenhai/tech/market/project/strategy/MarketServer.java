@@ -292,7 +292,7 @@ public class MarketServer {
                     tuDividends.add(dividend);
                 }
             }
-            return new ArrayList<>(tuDividendMap.values());
+            return tuDividends;
         }
         catch (Exception e) {
             log.error("getDividendsByCode Exception code:{}  e:{}", code, e);
